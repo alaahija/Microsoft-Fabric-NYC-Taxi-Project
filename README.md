@@ -1,4 +1,4 @@
-# 🚖 Microsoft Fabric - NYC Taxi Data Project
+# 🚖 Microsoft Fabric - New York City Yellow Taxi Data Project
 
 ## 📖 Overview
 The **NYC Taxi Data Project** is a comprehensive data analytics solution built using **Microsoft Fabric**.
@@ -170,10 +170,17 @@ tpep_dropoff_datetime | Ride end timestamp | DateTime | 2024-06-60 15:33:00
 tpep_pickup_datetime | Ride start timestamp | DateTime | 2024-06-30 15:00:00
 trip_distance | Distance traveled (miles) | Decimal | 5.2
 vendor | Taxi company/vendor | Text/String | "Creative Mobile Technologies"
-
+---
 ## 🗃️ 📊 Data Visualization - Power BI
 
 ![image](https://github.com/user-attachments/assets/f9a7e6a4-84c8-45a2-a6a5-7c54d9e0139f)
+---
+## 📚 Data Source
+
+The NYC Taxi Trip Record Data used in this project is publicly available from the official New York City Taxi and Limousine Commission (TLC):
+🔗 [NYC Taxi & Limousine Commission - Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
+This dataset contains detailed records of taxi rides, including pickup and drop-off locations, timestamps, passenger counts, trip distances, payment types, and fare amounts.
+
 ---
 ## 🌟 Key Advantages
 * **Real-Time Insights**: With Direct Lake mode, data visualizations are highly responsive and reflect the most recent taxi activity.
