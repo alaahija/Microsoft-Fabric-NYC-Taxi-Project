@@ -164,7 +164,7 @@ passenger_count | Number of passengers | Integer | 4
 payment_method | Payment method used | Text/String | Cash
 pu_borough | Borough of pickup | Text/String | Brooklyn
 pu_zone | Zone of pickup | Text/String | Downtown Manhattan
-total_rides | Aggregated total rides | Integer | 13,000,000
+total_rides | Aggregated total rides | Integer | 8,000,000
 total_amount | Total fare amount (USD) | Decimal | 70.05
 tpep_dropoff_datetime | Ride end timestamp | DateTime | 2024-06-60 15:33:00
 tpep_pickup_datetime | Ride start timestamp | DateTime | 2024-06-30 15:00:00
