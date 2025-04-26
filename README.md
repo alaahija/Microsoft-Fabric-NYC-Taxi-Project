@@ -48,7 +48,11 @@ SELECT TOP 1 latest_processed_pickup
 FROM metadata.processing_log
 WHERE table_processed = 'staging_nyctaxi_yellow'
 ORDER BY latest_processed_pickup DESC;
-#### b. Date Handling (Setting Date Variables)
+
+## Steps
+
+### b. Date Handling (Setting Date Variables)
+
 ```sql
 v_date = @formatDateTime(
     addToTime(
@@ -58,6 +62,13 @@ v_date = @formatDateTime(
     ), 
     'yyyy-MM'
 );
+
+v_end_date = @addToTime(
+    concat(variables('v_date'), '-01'), 
+    1, 
+    'Month'
+);
+
 
 v_end_date = @addToTime(
     concat(variables('v_date'), '-01'), 
@@ -109,6 +120,7 @@ SELECT
     MAX(tpep_pickup_datetime),
     @processed_date
 FROM dbo.nyctaxi_yellow;
+
 ## 🗂️ Metadata Management
 
 ### Schema and Table Creation
@@ -123,6 +135,42 @@ CREATE TABLE metadata.processing_log (
   latest_processed_pickup DATETIME2(6),
   processed_datetime DATETIME2(6)
 );
+### Insert Staging Metadata Procedure:
+```sql
+CREATE PROCEDURE metadata.insert_staging_metadata
+@pipeline_run_id VARCHAR(255),
+@table_name VARCHAR(255),
+@processed_date DATETIME2
+AS
+INSERT INTO metadata.processing_log
+SELECT 
+    @pipeline_run_id,
+    @table_name,
+    COUNT(*),
+    MAX(tpep_pickup_datetime),
+    @processed_date
+FROM stg.nyctaxi_yellow;
+## ➡️ Data Flow:
+*Data Deletion: Clear staging tables before loading.
+*Data Load: Load fresh data into staging, transform, and then append to the presentation layer.
+## 🗃️ Data Dictionary:
+Field Name | Description | Data Type | Example Value
+do_borough | Borough of drop-off | Text/String | "Manhattan"
+do_zone | Zone of drop-off | Text/String | "Upper West Side"
+passenger_count | Number of passengers | Integer | 2
+payment_method | Payment method used | Text/String | "Credit Card"
+pu_borough | Borough of pickup | Text/String | "Brooklyn"
+pu_zone | Zone of pickup | Text/String | "Downtown Brooklyn"
+total_rides | Aggregated total rides | Integer | 13,000,000
+total_amount | Total fare amount (USD) | Decimal | 53.25
+tpep_dropoff_datetime | Ride end timestamp | DateTime | "2024-01-01 15:30:00"
+tpep_pickup_datetime | Ride start timestamp | DateTime | "2024-01-01 15:00:00"
+trip_distance | Distance traveled (miles) | Decimal | 5.2
+vendor | Taxi company/vendor | Text/String | "Creative Mobile Technologies"
+
+## 🗃️ 📊 Data Visualization - Power BI
+
+![image](https://github.com/user-attachments/assets/f9a7e6a4-84c8-45a2-a6a5-7c54d9e0139f)
 
 
 
