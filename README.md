@@ -1,4 +1,6 @@
 # 🚖 Microsoft Fabric - New York City Yellow Taxi Data Project
+![image](https://github.com/user-attachments/assets/1bda5140-f0e9-4bf4-bbb6-8922df899653)
+
 
 ## 📖 Overview
 The **NYC Taxi Data Project** is a comprehensive data analytics solution built using **Microsoft Fabric**.
